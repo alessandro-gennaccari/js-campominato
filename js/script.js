@@ -8,12 +8,12 @@
 
 var nCpu = [];
 var nUser = [];
-var bomb = false
+var bomb = false;
 var numero;
 var numeroUser;
 var score = 0;
+var difficulty = diff(difficulty);
 var nMax;
-var difficulty = parseInt(prompt('Scegli La difficoltà tra "0" , "1" , "2" '))
 
 switch (difficulty){
     case 1:
@@ -27,6 +27,7 @@ switch (difficulty){
 }
 
 while (nCpu.length < 16) {
+
     numero = nRandom(1,nMax);
     if (nCpu.includes(numero) == false){
         nCpu.push(numero);
@@ -45,6 +46,7 @@ while (nUser.length < (nMax - 16) && bomb == false) {
     } else {
         nUser.push(numeroUser);
         score++;
+
     }
 }
 
@@ -55,4 +57,11 @@ console.log(nUser);
 // Gerera un numero random
 function nRandom(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+// Seleziona una difficolta adeguata
+function diff(set) {
+    do {
+        set = parseInt(prompt('Scegli La difficoltà tra "0" , "1" , "2" '));
+    } while (set != 0 && set != 1 && set != 2);
+    return set;
 }
