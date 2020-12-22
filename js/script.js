@@ -11,8 +11,13 @@
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
 var nCpu = [];
-
+var nUser = [];
+var difficulty = diff(difficulty);
+var bomb = false
 var numero;
+var numeroUser;
+var score = 0;
+
 while (nCpu.length < 16) {
 
     numero = nRandom(1,100);
@@ -21,18 +26,33 @@ while (nCpu.length < 16) {
     }
 }
 
-console.log(nCpu.sort());
+while (nUser.length < 84 && bomb == false) {
+    numeroUser = parseInt(prompt('Inserisci un numero'));
+    if (numeroUser < 1 || numeroUser > 100 || isNaN(numeroUser)) {
+        alert('Puoi inserire solo numeri compresi tra "1" e "100" compresi.\nTutto il resto non è ammesso.');
+    } else if (nUser.includes(numeroUser)) {
+        alert('Hai già provato questo numero!');
+    } else if (nCpu.includes(numeroUser)) {
+        alert('Hai Perso!\nLa partita è terminata.\nIl tuo score è = ' + score);
+        bomb = true;
+    } else {
+        nUser.push(numeroUser);
+        score++;
+    }
+}
 
-
-
-
-
-
-
+console.log(nCpu);
+console.log(nUser);
 
 // Funzioni
-
 // Gerera un numero random
 function nRandom(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Seleziona una difficolta adeguata
+function diff(set) {
+    do {
+        set = parseInt(prompt('Scegli La difficoltà tra "0" , "1" , "2" '));
+    } while (set != 0 && set != 1 && set != 2) 
 }
