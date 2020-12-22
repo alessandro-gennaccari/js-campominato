@@ -27,7 +27,6 @@ switch (difficulty){
 }
 
 while (nCpu.length < 16) {
-
     numero = nRandom(1,nMax);
     if (nCpu.includes(numero) == false){
         nCpu.push(numero);
@@ -37,21 +36,20 @@ while (nCpu.length < 16) {
 while (nUser.length < (nMax - 16) && bomb == false) {
     numeroUser = parseInt(prompt('Inserisci un numero'));
     if (numeroUser < 1 || numeroUser > 100 || isNaN(numeroUser)) {
-        alert('Puoi inserire solo numeri compresi tra "1" e "100" compresi.\nTutto il resto non è ammesso.');
+        alert('Puoi inserire solo numeri tra "1" e "100" compresi.\nTutto il resto non è ammesso.');
     } else if (nUser.includes(numeroUser)) {
-        alert('Hai già provato questo numero!');
+        alert('Hai già provato questo numero!\nProvane un altro');
     } else if (nCpu.includes(numeroUser)) {
         alert('Hai Perso!\nLa partita è terminata.\nIl tuo score è = ' + score);
         bomb = true;
     } else {
         nUser.push(numeroUser);
         score++;
-
     }
 }
 
-console.log(nCpu);
-console.log(nUser);
+document.write('I numeri bomba: ' + nCpu.sort() + '<br>');
+document.write('I numeri indovinati: ' + nUser.sort());
 
 // Funzioni
 // Gerera un numero random
