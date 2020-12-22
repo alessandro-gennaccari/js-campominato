@@ -8,21 +8,32 @@
 
 var nCpu = [];
 var nUser = [];
-var difficulty = diff(difficulty);
 var bomb = false
 var numero;
 var numeroUser;
 var score = 0;
+var nMax;
+var difficulty = parseInt(prompt('Scegli La difficoltà tra "0" , "1" , "2" '))
+
+switch (difficulty){
+    case 1:
+        nMax = 80;
+        break;
+    case 2:
+        nMax = 50;
+        break;
+    default:
+        nMax = 100;
+}
 
 while (nCpu.length < 16) {
-
-    numero = nRandom(1,100);
+    numero = nRandom(1,nMax);
     if (nCpu.includes(numero) == false){
         nCpu.push(numero);
     }
 }
 
-while (nUser.length < 84 && bomb == false) {
+while (nUser.length < (nMax - 16) && bomb == false) {
     numeroUser = parseInt(prompt('Inserisci un numero'));
     if (numeroUser < 1 || numeroUser > 100 || isNaN(numeroUser)) {
         alert('Puoi inserire solo numeri compresi tra "1" e "100" compresi.\nTutto il resto non è ammesso.');
@@ -44,10 +55,4 @@ console.log(nUser);
 // Gerera un numero random
 function nRandom(min,max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-// Seleziona una difficolta adeguata
-function diff(set) {
-    do {
-        set = parseInt(prompt('Scegli La difficoltà tra "0" , "1" , "2" '));
-    } while (set != 0 && set != 1 && set != 2);
 }
